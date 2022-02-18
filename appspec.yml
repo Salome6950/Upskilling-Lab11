@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: springboot-0.0.1-SNAPSHOT.war
-    destination: /home/ec2-user
+    destination: /home/ubuntu
 hooks:
   ApplicationStart:
     - location: start_server.sh
