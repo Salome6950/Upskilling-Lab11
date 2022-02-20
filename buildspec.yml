@@ -16,4 +16,5 @@ phases:
             - echo "Post_build"
 artifacts:
     files:
-        target/springboot-0.0.1-SNAPSHOT.war
+        - target/springboot-0.0.1-SNAPSHOT.war
+        - appspec.yml
