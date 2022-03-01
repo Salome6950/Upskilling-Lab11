@@ -1,10 +1,23 @@
 version: 0.0
-os: linux
-files:
-  - source: springboot-0.0.1-SNAPSHOT.war
-    destination: /home/ec2-user
-hooks:
-  ApplicationStart:
-    - location: start_server.sh
-      timeout: 300
-      runas: root
+phases:
+    install:
+        runtime-versions:
+            java: corretto11
+    pre_build:
+        commands:
+            - echo "Pre_build"
+    build:
+        commands:
+            - echo "Build"
+            - mvn clean install
+            - aws s3 cp target/springboot-0.0.1-SNAPSHOT.war s3://lab11-codedeploy/
+    post_build:
+        commands:
+            - echo "Post_build"
+    artifacts:
+        files:
+            - target/*.war
+            - scripts/server_start.sh
+- scripts/server_stop.sh
+- TestXMLFile.xml
+- appspec.yml
